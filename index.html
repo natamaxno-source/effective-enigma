@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Наталья — портфолио</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    }
+
+    /* --- animated bg --- */
+    #bg-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- reveal animation --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- header --- */
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+    }
+    header h1 {
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #f7971e, #ffd200, #f7971e);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    header .tagline {
+      font-size: 20px;
+      color: rgba(255,255,255,.7);
+      max-width: 500px;
+      margin: 0 auto 32px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      text-decoration: none;
+      font-size: 15px;
+      transition: all .3s ease;
+      background: transparent;
+      cursor: pointer;
+    }
+    .btn:hover {
+      border-color: #ffd200;
+      color: #ffd200;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(255,210,0,.12);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #1a1a1a;
+      border-color: transparent;
+      font-weight: 600;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ffd200, #f7971e);
+      color: #1a1a1a;
+      border-color: transparent;
+      box-shadow: 0 8px 30px rgba(255,210,0,.25);
+    }
+    .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* --- sections --- */
+    section {
+      padding: 100px 0;
+      position: relative;
+      z-index: 1;
+    }
+    section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 40px;
+      letter-spacing: -.5px;
+      background: linear-gradient(135deg, #ffd200, #f7971e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* --- about --- */
+    .about-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.12);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .about-card p {
+      font-size: 18px;
+      color: rgba(255,255,255,.85);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* --- services --- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .service-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.1);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all .4s ease;
+      cursor: default;
+    }
+    .service-card:nth-child(1) { border-color: rgba(247,151,30,.2); }
+    .service-card:nth-child(2) { border-color: rgba(255,210,0,.15); }
+    .service-card:hover {
+      background: rgba(255,255,255,.1);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(247,151,30,.15);
+    }
+    .service-card h3 {
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .service-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,.65);
+    }
+
+    /* --- portfolio --- */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .portfolio-item {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.1);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all .4s ease;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,210,0,.25);
+      box-shadow: 0 20px 50px rgba(247,151,30,.12);
+    }
+    .portfolio-item video {
+      width: 100%;
+      display: block;
+      background: #000;
+    }
+    .portfolio-item .label {
+      padding: 16px 20px;
+      font-weight: 500;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    /* --- projects --- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 24px;
+    }
+    .project-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.1);
+      border-radius: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all .4s ease;
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,210,0,.25);
+      box-shadow: 0 20px 50px rgba(247,151,30,.12);
+    }
+    .project-card .project-header {
+      padding: 32px 28px 20px;
+    }
+    .project-card .project-badge {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      margin-bottom: 12px;
+    }
+    .badge-green { background: rgba(16,185,129,.2); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
+    .badge-purple { background: rgba(139,92,246,.2); color: #a78bfa; border: 1px solid rgba(139,92,246,.3); }
+    .project-card h3 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .project-card .project-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .project-card .project-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .project-card .project-features span {
+      background: rgba(255,210,0,.08);
+      border: 1px solid rgba(255,210,0,.12);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 13px;
+      color: rgba(255,255,255,.7);
+    }
+    .project-card .project-tech {
+      padding: 16px 28px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .project-card .project-tech span {
+      background: rgba(255,255,255,.06);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.6);
+    }
+    .project-card .project-links {
+      padding: 0 28px 24px;
+      display: flex;
+      gap: 12px;
+    }
+    .project-card .project-links a {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all .3s ease;
+    }
+    .link-primary {
+      background: linear-gradient(135deg, #f7971e, #ffd200);
+      color: #1a1a1a;
+    }
+    .link-primary:hover {
+      box-shadow: 0 8px 25px rgba(255,210,0,.25);
+      transform: translateY(-2px);
+    }
+    .link-outline {
+      border: 1px solid rgba(255,255,255,.25);
+      color: #fff;
+      background: transparent;
+    }
+    .link-outline:hover {
+      border-color: #ffd200;
+      color: #ffd200;
+    }
+    .project-screenshots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 0 28px 20px;
+    }
+    .project-screenshots img {
+      width: 100%;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,.08);
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      background: rgba(255,255,255,.03);
+    }
+
+    /* --- stack --- */
+    .stack-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .stack-tags span {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.12);
+      border-radius: 50px;
+      padding: 8px 22px;
+      font-size: 14px;
+      color: rgba(255,255,255,.75);
+      transition: all .3s ease;
+    }
+    .stack-tags span:hover {
+      background: rgba(255,210,0,.1);
+      border-color: #ffd200;
+      color: #ffd200;
+    }
+
+    /* --- contacts --- */
+    .contacts-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,210,0,.12);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .contacts p {
+      font-size: 17px;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 10px;
+    }
+    .contacts a {
+      color: #ffd200;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,210,0,.3);
+      transition: border-color .3s;
+    }
+    .contacts a:hover { border-color: #ffd200; }
+
+    /* --- footer --- */
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      font-size: 14px;
+      color: rgba(255,255,255,.35);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* --- responsive --- */
+    @media (max-width: 600px) {
+      header h1 { font-size: 40px; }
+      header .tagline { font-size: 17px; }
+      section { padding: 60px 0; }
+      section h2 { font-size: 26px; }
+      .about-card,
+      .contacts-card { padding: 24px; }
+      .btn-group { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+
+<header>
+  <div class="container">
+    <div class="reveal">
+      <h1>Наталья</h1>
+      <p class="tagline">
+        Создаю видео и визуал для рекламы и образования.<br>
+        Понятно, красиво, с душой.
+      </p>
+      <div class="btn-group">
+        <a href="#portfolio" class="btn btn-primary">Смотреть работы</a>
+        <a href="#contacts" class="btn">Связаться</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="about" class="about">
+  <div class="container">
+    <div class="reveal">
+      <div class="about-card">
+        <h2>О себе</h2>
+        <p>
+          Привет! Меня зовут Наталья. Я начинающий фрилансер.
+          Работаю с нейросетями, чтобы делать живые, тёплые и эффективные
+          видео и графику. Мой подход — технологии + человечность.
+          Никакого «холодного AI».
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services">
+  <div class="container">
+    <div class="reveal">
+      <h2>Услуги</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Рекламные ролики</h3>
+          <p>Видео для продвижения товаров и услуг в соцсетях, на сайтах и рекламных площадках</p>
+        </div>
+        <div class="service-card">
+          <h3>Видео для соцсетей</h3>
+          <p>Короткие ролики для VK, Telegram и других платформ — рилсы, сторис, посты</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="portfolio">
+  <div class="container">
+    <div class="reveal">
+      <h2>Портфолио</h2>
+      <div class="portfolio-grid" id="portfolio-grid">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="projects">
+  <div class="container">
+    <div class="reveal">
+      <h2>Веб-приложения</h2>
+      <div class="projects-grid">
+
+        <!-- Чистый Финал — Лендинг + Калькулятор -->
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-badge badge-green">Лендинг</span>
+            <h3>Чистый Финал — Лендинг</h3>
+            <p class="project-desc">
+              Лендинг клининговой компании с онлайн-калькулятором стоимости уборки. 
+              Клиент выбирает тип уборки, параметры — получает расчёт цены мгновенно.
+            </p>
+            <div class="project-features">
+              <span>Калькулятор</span>
+              <span>Адаптивный</span>
+              <span>SEO</span>
+              <span>Форма заявки</span>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Чистый Финал -->
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-badge badge-green">Веб-приложение</span>
+            <h3>Чистый Финал</h3>
+            <p class="project-desc">
+              Облачное приложение для клининговой компании. Калькулятор стоимости услуг, 
+              база знаний, панель администратора, управление заказами.
+            </p>
+            <div class="project-features">
+              <span>Калькулятор</span>
+              <span>Админ-панель</span>
+              <span>База знаний</span>
+              <span>Заказы</span>
+              <span>API</span>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Express.js</span>
+            <span>SQLite</span>
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/natamaxno-source/chistyj-final" class="link-outline" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Школа Роста -->
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-badge badge-purple">Трекер задач</span>
+            <h3>Школа Роста</h3>
+            <p class="project-desc">
+              Кастомный трекер задач для онлайн-школы. Управление проектами, задачами, учениками и командой. 
+              Панель аналитики с дедлайнами и статистикой.
+            </p>
+            <div class="project-features">
+              <span>Дашборд</span>
+              <span>Проекты</span>
+              <span>Задачи</span>
+              <span>Ученики</span>
+              <span>Команда</span>
+              <span>Комментарии</span>
+              <span>Роли</span>
+              <span>Авторизация</span>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Express.js</span>
+            <span>React</span>
+            <span>SQLite</span>
+            <span>TailwindCSS</span>
+            <span>Vite</span>
+            <span>JWT</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/natamaxno-source/shkola-rosta-tracker" class="link-outline" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <!-- Glow Tracker -->
+        <div class="project-card">
+          <div class="project-header">
+            <span class="project-badge badge-green">CRM система</span>
+            <h3>Glow Tracker</h3>
+            <p class="project-desc">
+              Трекер задач для эстетической клиники. Панель управления для администратора, куратора и клиента. 
+              Расписание, задачи, уведомления, чат.
+            </p>
+            <div class="project-features">
+              <span>3 роли</span>
+              <span>Расписание</span>
+              <span>Чат</span>
+              <span>Уведомления</span>
+              <span>Задачи</span>
+              <span>Клиенты</span>
+              <span>Дашборд</span>
+            </div>
+          </div>
+          <div class="project-tech">
+            <span>Express.js</span>
+            <span>SQLite</span>
+            <span>EJS</span>
+            <span>CSS</span>
+            <span>JWT</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/natamaxno-source/effective-enigma" class="link-outline" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack" class="stack">
+  <div class="container">
+    <div class="reveal">
+      <h2>Стек</h2>
+      <div class="stack-tags">
+        <span>Qwen3.7-Plus</span>
+        <span>Flyvi.io</span>
+        <span>Study24.ai</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" class="contacts">
+  <div class="container">
+    <div class="reveal">
+      <div class="contacts-card">
+        <h2>Контакты</h2>
+        <p>✉ <a href="mailto:nmahnovets@yandex.ru">nmahnovets@yandex.ru</a></p>
+        <div class="btn-group" style="margin-top:24px">
+          <a href="mailto:nmahnovets@yandex.ru" class="btn btn-primary">Написать</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">© 2026 Наталья</div>
+</footer>
+
+<script>
+  // --- animated bg ---
+  (function() {
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+    let w, h, particles = [];
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        r: Math.random() * 4 + 2,
+        a: Math.random() * 0.5 + 0.3
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      for (let p of particles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,210,0,${p.a})`;
+        ctx.fill();
+      }
+      // connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 200) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(255,210,0,${0.12 * (1 - dist / 200)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+
+  // --- portfolio render ---
+  const videos = [
+    { file: "videos/Видеоаватар.mp4", label: "Видеоаватар" },
+    { file: "videos/prezentaciya.mp4", label: "Презентация приложений" },
+    { file: "Реклама_школа_английского.mp4", label: "Реклама школы английского" },
+    { file: "Реклама_туроператор.mp4", label: "Реклама туроператора" },
+    { file: "Реклама_IT_Speak.mp4", label: "Реклама для школы IT Speak" },
+  ];
+  const grid = document.getElementById('portfolio-grid');
+  videos.forEach(v => {
+    const item = document.createElement('div');
+    item.className = 'portfolio-item';
+    item.innerHTML = `<video controls preload="metadata"><source src="${v.file}" type="video/mp4"></video><div class="label">${v.label}</div>`;
+    grid.appendChild(item);
+  });
+
+  // --- scroll reveal ---
+  (function() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  })();
+</script>
+
+</body>
+</html>
