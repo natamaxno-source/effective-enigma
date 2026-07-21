@@ -330,6 +330,13 @@
       background: rgba(255,255,255,.03);
       transition: all .4s ease;
     }
+    .project-screenshots video {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      display: block;
+      background: #000;
+    }
     .project-screenshots img:hover {
       transform: scale(1.02);
       border-color: rgba(255,210,0,.3);
@@ -473,10 +480,12 @@
         <!-- Чистый Финал -->
         <div class="project-card">
           <div class="project-screenshots">
-            <img src="screenshots/chistiy-final.png" alt="Чистый Финал" loading="lazy">
+            <video autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:12px;display:block;background:#000;">
+              <source src="videos/prezentaciya.mp4" type="video/mp4">
+            </video>
           </div>
           <div class="project-header">
-            <span class="project-badge badge-green">Веб-приложение</span>
+            <span class="project-badge badge-green">Веб-приложение + Лендинг</span>
             <h3>Чистый Финал</h3>
             <p class="project-desc">
               Лендинг и приложение для клининговой компании. Онлайн-калькулятор стоимости уборки,
@@ -673,7 +682,6 @@
   // --- portfolio render ---
   const videos = [
     { file: "videos/Видеоаватар.mp4", label: "Видеоаватар" },
-    { file: "videos/prezentaciya.mp4", label: "Презентация приложений" },
     { file: "videos/Реклама_школа_английского.mp4", label: "Реклама школы английского" },
     { file: "videos/Реклама_туроператор.mp4", label: "Реклама туроператора" },
     { file: "videos/Реклама_IT_Speak.mp4", label: "Реклама для школы IT Speak" },
