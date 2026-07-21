@@ -312,17 +312,25 @@
     }
     .project-screenshots {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 4px;
-      padding: 0 28px 20px;
+      gap: 8px;
+      padding: 20px 28px 0;
+    }
+    .project-screenshots:has(img:nth-child(2)) {
+      grid-template-columns: 1fr 1fr;
     }
     .project-screenshots img {
       width: 100%;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,.08);
-      aspect-ratio: 16/10;
+      height: 200px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
       object-fit: cover;
+      object-position: top;
       background: rgba(255,255,255,.03);
+      transition: all .4s ease;
+    }
+    .project-screenshots img:hover {
+      transform: scale(1.02);
+      border-color: rgba(255,210,0,.3);
     }
 
     /* --- stack --- */
@@ -462,6 +470,9 @@
 
         <!-- Чистый Финал — Лендинг + Калькулятор -->
         <div class="project-card">
+          <div class="project-screenshots">
+            <img src="screenshots/chistiy-final.png" alt="Чистый Финал — лендинг" loading="lazy">
+          </div>
           <div class="project-header">
             <span class="project-badge badge-green">Лендинг</span>
             <h3>Чистый Финал — Лендинг</h3>
@@ -485,6 +496,9 @@
 
         <!-- Чистый Финал -->
         <div class="project-card">
+          <div class="project-screenshots">
+            <img src="screenshots/chistiy-final.png" alt="Чистый Финал — приложение" loading="lazy">
+          </div>
           <div class="project-header">
             <span class="project-badge badge-green">Веб-приложение</span>
             <h3>Чистый Финал</h3>
@@ -510,6 +524,10 @@
 
         <!-- Школа Роста -->
         <div class="project-card">
+          <div class="project-screenshots">
+            <img src="screenshots/shkola-rosta-login.png" alt="Школа Роста — вход" loading="lazy">
+            <img src="screenshots/shkola-rosta-dashboard.png" alt="Школа Роста — дашборд" loading="lazy">
+          </div>
           <div class="project-header">
             <span class="project-badge badge-purple">Трекер задач</span>
             <h3>Школа Роста</h3>
@@ -540,6 +558,9 @@
 
         <!-- Glow Tracker -->
         <div class="project-card">
+          <div class="project-screenshots">
+            <img src="screenshots/glow-tracker.png" alt="Glow Tracker — лендинг" loading="lazy">
+          </div>
           <div class="project-header">
             <span class="project-badge badge-green">CRM система</span>
             <h3>Glow Tracker</h3>
@@ -564,7 +585,6 @@
             <span>CSS</span>
             <span>JWT</span>
           </div>
-          <div class="project-links">
         </div>
 
       </div>
