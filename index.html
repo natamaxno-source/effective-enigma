@@ -314,6 +314,8 @@
       display: grid;
       gap: 8px;
       padding: 20px 28px 0;
+      background: rgba(0,0,0,.2);
+      border-radius: 20px 20px 0 0;
     }
     .project-screenshots:has(img:nth-child(2)) {
       grid-template-columns: 1fr 1fr;
@@ -468,45 +470,16 @@
       <h2>Веб-приложения</h2>
       <div class="projects-grid">
 
-        <!-- Чистый Финал — Лендинг + Калькулятор -->
-        <div class="project-card">
-          <div class="project-screenshots">
-            <img src="screenshots/chistiy-final.png" alt="Чистый Финал — лендинг" loading="lazy">
-          </div>
-          <div class="project-header">
-            <span class="project-badge badge-green">Лендинг</span>
-            <h3>Чистый Финал — Лендинг</h3>
-            <p class="project-desc">
-              Лендинг клининговой компании с онлайн-калькулятором стоимости уборки. 
-              Клиент выбирает тип уборки, параметры — получает расчёт цены мгновенно.
-            </p>
-            <div class="project-features">
-              <span>Калькулятор</span>
-              <span>Адаптивный</span>
-              <span>SEO</span>
-              <span>Форма заявки</span>
-            </div>
-          </div>
-          <div class="project-tech">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://gas-zone-defence-organization.trycloudflare.com" target="_blank" class="link-primary">Открыть</a>
-          </div>
-        </div>
-
         <!-- Чистый Финал -->
         <div class="project-card">
           <div class="project-screenshots">
-            <img src="screenshots/chistiy-final.png" alt="Чистый Финал — приложение" loading="lazy">
+            <img src="screenshots/chistiy-final.png" alt="Чистый Финал" loading="lazy">
           </div>
           <div class="project-header">
             <span class="project-badge badge-green">Веб-приложение</span>
             <h3>Чистый Финал</h3>
             <p class="project-desc">
-              Облачное приложение для клининговой компании. Калькулятор стоимости услуг, 
+              Лендинг и приложение для клининговой компании. Онлайн-калькулятор стоимости уборки,
               база знаний, панель администратора, управление заказами.
             </p>
             <div class="project-features">
@@ -515,13 +488,15 @@
               <span>База знаний</span>
               <span>Заказы</span>
               <span>API</span>
+              <span>Адаптивный</span>
             </div>
           </div>
           <div class="project-tech">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
             <span>Express.js</span>
             <span>SQLite</span>
-            <span>HTML/CSS</span>
-            <span>JavaScript</span>
           </div>
           <div class="project-links">
             <a href="https://gas-zone-defence-organization.trycloudflare.com" target="_blank" class="link-primary">Открыть</a>
