@@ -15,7 +15,6 @@
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
     }
 
-    /* --- animated bg --- */
     #bg-canvas {
       position: fixed;
       top: 0; left: 0;
@@ -32,7 +31,6 @@
       z-index: 1;
     }
 
-    /* --- reveal animation --- */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -43,7 +41,6 @@
       transform: translateY(0);
     }
 
-    /* --- header --- */
     header {
       min-height: 100vh;
       display: flex;
@@ -106,7 +103,6 @@
     }
     .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    /* --- sections --- */
     section {
       padding: 100px 0;
       position: relative;
@@ -123,7 +119,6 @@
       background-clip: text;
     }
 
-    /* --- about --- */
     .about-card {
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,210,0,.12);
@@ -139,7 +134,6 @@
       line-height: 1.7;
     }
 
-    /* --- services --- */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -172,13 +166,12 @@
       color: rgba(255,255,255,.65);
     }
 
-    /* --- portfolio --- */
-    .portfolio-grid {
+    /* --- cases --- */
+    .cases-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
+      gap: 32px;
     }
-    .portfolio-item {
+    .case-card {
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,210,0,.1);
       border-radius: 20px;
@@ -187,47 +180,32 @@
       -webkit-backdrop-filter: blur(12px);
       transition: all .4s ease;
     }
-    .portfolio-item:hover {
-      transform: translateY(-6px);
+    .case-card:hover {
+      transform: translateY(-4px);
       border-color: rgba(255,210,0,.25);
       box-shadow: 0 20px 50px rgba(247,151,30,.12);
     }
-    .portfolio-item video {
+    .case-visual {
+      background: rgba(0,0,0,.3);
+      padding: 20px;
+    }
+    .case-visual img {
       width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
+      display: block;
+    }
+    .case-visual video {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.1);
       display: block;
       background: #000;
     }
-    .portfolio-item .label {
-      padding: 16px 20px;
-      font-weight: 500;
-      font-size: 15px;
-      color: #fff;
+    .case-body {
+      padding: 28px 28px 24px;
     }
-
-    /* --- projects --- */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 24px;
-    }
-    .project-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,210,0,.1);
-      border-radius: 20px;
-      overflow: hidden;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      transition: all .4s ease;
-    }
-    .project-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(255,210,0,.25);
-      box-shadow: 0 20px 50px rgba(247,151,30,.12);
-    }
-    .project-card .project-header {
-      padding: 32px 28px 20px;
-    }
-    .project-card .project-badge {
+    .case-badge {
       display: inline-block;
       padding: 4px 14px;
       border-radius: 50px;
@@ -237,26 +215,58 @@
       letter-spacing: .5px;
       margin-bottom: 12px;
     }
-    .badge-green { background: rgba(16,185,129,.2); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
-    .badge-purple { background: rgba(139,92,246,.2); color: #a78bfa; border: 1px solid rgba(139,92,246,.3); }
-    .project-card h3 {
+    .badge-app { background: rgba(16,185,129,.2); color: #34d399; border: 1px solid rgba(16,185,129,.3); }
+    .badge-video { background: rgba(139,92,246,.2); color: #a78bfa; border: 1px solid rgba(139,92,246,.3); }
+    .badge-landing { background: rgba(247,151,30,.2); color: #f7971e; border: 1px solid rgba(247,151,30,.3); }
+    .case-body h3 {
       font-size: 22px;
       color: #fff;
       margin-bottom: 8px;
     }
-    .project-card .project-desc {
+    .case-body .case-niche {
+      font-size: 13px;
+      color: rgba(255,255,255,.45);
+      margin-bottom: 12px;
+    }
+    .case-body .case-desc {
       font-size: 15px;
-      color: rgba(255,255,255,.65);
+      color: rgba(255,255,255,.7);
       line-height: 1.6;
       margin-bottom: 16px;
     }
-    .project-card .project-features {
+    .case-results {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .case-result {
+      background: rgba(255,210,0,.06);
+      border: 1px solid rgba(255,210,0,.12);
+      border-radius: 12px;
+      padding: 12px 18px;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+    }
+    .case-result .num {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffd200;
+      display: block;
+    }
+    .case-result .lbl {
+      font-size: 12px;
+      color: rgba(255,255,255,.5);
+      margin-top: 2px;
+    }
+    .case-features {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-bottom: 20px;
     }
-    .project-card .project-features span {
+    .case-features span {
       background: rgba(255,210,0,.08);
       border: 1px solid rgba(255,210,0,.12);
       border-radius: 8px;
@@ -264,27 +274,24 @@
       font-size: 13px;
       color: rgba(255,255,255,.7);
     }
-    .project-card .project-tech {
-      padding: 16px 28px;
-      border-top: 1px solid rgba(255,255,255,.06);
+    .case-tech {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      align-items: center;
+      margin-bottom: 20px;
     }
-    .project-card .project-tech span {
+    .case-tech span {
       background: rgba(255,255,255,.06);
       border-radius: 6px;
       padding: 4px 10px;
       font-size: 12px;
-      color: rgba(255,255,255,.6);
+      color: rgba(255,255,255,.5);
     }
-    .project-card .project-links {
-      padding: 0 28px 24px;
+    .case-links {
       display: flex;
       gap: 12px;
     }
-    .project-card .project-links a {
+    .case-links a {
       display: inline-block;
       padding: 10px 22px;
       border-radius: 50px;
@@ -310,39 +317,7 @@
       border-color: #ffd200;
       color: #ffd200;
     }
-    .project-screenshots {
-      display: grid;
-      gap: 8px;
-      padding: 20px 28px 0;
-      background: rgba(0,0,0,.2);
-      border-radius: 20px 20px 0 0;
-    }
-    .project-screenshots:has(img:nth-child(2)) {
-      grid-template-columns: 1fr 1fr;
-    }
-    .project-screenshots img {
-      width: 100%;
-      height: 200px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      object-fit: cover;
-      object-position: top;
-      background: rgba(255,255,255,.03);
-      transition: all .4s ease;
-    }
-    .project-screenshots video {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.1);
-      display: block;
-      background: #000;
-    }
-    .project-screenshots img:hover {
-      transform: scale(1.02);
-      border-color: rgba(255,210,0,.3);
-    }
 
-    /* --- stack --- */
     .stack-tags {
       display: flex;
       flex-wrap: wrap;
@@ -363,7 +338,6 @@
       color: #ffd200;
     }
 
-    /* --- contacts --- */
     .contacts-card {
       background: rgba(255,255,255,.06);
       border: 1px solid rgba(255,210,0,.12);
@@ -385,7 +359,6 @@
     }
     .contacts a:hover { border-color: #ffd200; }
 
-    /* --- footer --- */
     footer {
       text-align: center;
       padding: 40px 0;
@@ -395,7 +368,6 @@
       z-index: 1;
     }
 
-    /* --- responsive --- */
     @media (max-width: 600px) {
       header h1 { font-size: 40px; }
       header .tagline { font-size: 17px; }
@@ -404,6 +376,7 @@
       .about-card,
       .contacts-card { padding: 24px; }
       .btn-group { flex-direction: column; align-items: center; }
+      .case-results { flex-direction: column; }
     }
   </style>
 </head>
@@ -416,11 +389,11 @@
     <div class="reveal">
       <h1>Наталья</h1>
       <p class="tagline">
-        Создаю видео и визуал для рекламы и образования.<br>
-        Понятно, красиво, с душой.
+        Вайб-кодер: создаю веб-приложения, боты и автоматизацию для бизнеса.<br>
+        Быстро, недорого, работает.
       </p>
       <div class="btn-group">
-        <a href="#portfolio" class="btn btn-primary">Смотреть работы</a>
+        <a href="#cases" class="btn btn-primary">Смотреть кейсы</a>
         <a href="#contacts" class="btn">Связаться</a>
       </div>
     </div>
@@ -433,10 +406,10 @@
       <div class="about-card">
         <h2>О себе</h2>
         <p>
-          Привет! Меня зовут Наталья. Я начинающий фрилансер.
-          Работаю с нейросетями, чтобы делать живые, тёплые и эффективные
-          видео и графику. Мой подход — технологии + человечность.
-          Никакого «холодного AI».
+          Привет! Меня зовут Наталья. Я вайб-кодер — создаю цифровые продукты
+          с помощью ИИ-агентов: от лендингов до CRM-систем и трекеров задач.
+          Не пишу код вручную, но контролирую каждый этап: от ТЗ до деплоя.
+          Мой подход — быстро, недорого, работает.
         </p>
       </div>
     </div>
@@ -449,109 +422,105 @@
       <h2>Услуги</h2>
       <div class="services-grid">
         <div class="service-card">
-          <h3>Рекламные ролики</h3>
-          <p>Видео для продвижения товаров и услуг в соцсетях, на сайтах и рекламных площадках</p>
+          <h3>Веб-приложения</h3>
+          <p>Трекеры задач, CRM-системы, панели управления, калькуляторы — от MVP до полноценного продукта</p>
         </div>
         <div class="service-card">
-          <h3>Видео для соцсетей</h3>
-          <p>Короткие ролики для VK, Telegram и других платформ — рилсы, сторис, посты</p>
+          <h3>Автоматизация</h3>
+          <p>Чат-боты, интеграции, скрипты, парсеры — автоматизация рутинных процессов для бизнеса</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="portfolio" class="portfolio">
+<section id="cases" class="cases">
   <div class="container">
     <div class="reveal">
-      <h2>Портфолио</h2>
-      <div class="portfolio-grid" id="portfolio-grid">
-      </div>
-    </div>
-  </div>
-</section>
+      <h2>Кейсы</h2>
+      <div class="cases-grid">
 
-<section id="projects" class="projects">
-  <div class="container">
-    <div class="reveal">
-      <h2>Веб-приложения</h2>
-      <div class="projects-grid">
-
-        <!-- Чистый Финал — Лендинг -->
-        <div class="project-card">
-          <div class="project-screenshots">
+        <!-- Кейс 1: Чистый Финал -->
+        <div class="case-card">
+          <div class="case-visual">
             <img src="screenshots/chistiy-final.png" alt="Чистый Финал — лендинг" loading="lazy">
           </div>
-          <div class="project-header">
-            <span class="project-badge badge-green">Лендинг</span>
-            <h3>Чистый Финал — Лендинг</h3>
-            <p class="project-desc">
-              Лендинг клининговой компании с онлайн-калькулятором стоимости уборки.
-              Клиент выбирает тип уборки, параметры — получает расчёт цены мгновенно.
+          <div class="case-body">
+            <span class="case-badge badge-landing">Лендинг + Приложение</span>
+            <h3>Чистый Финал</h3>
+            <p class="case-niche">Ниша: клининговая компания</p>
+            <p class="case-desc">
+              Лендинг с онлайн-калькулятором стоимости уборки и облачное приложение
+              для управления заказами. Клиент выбирает тип уборки, параметры —
+              получает расчёт цены мгновенно. Администратор управляет заказами
+              через панель.
             </p>
-            <div class="project-features">
-              <span>Калькулятор</span>
-              <span>Адаптивный</span>
-              <span>SEO</span>
-              <span>Форма заявки</span>
+            <div class="case-results">
+              <div class="case-result">
+                <span class="num">2 дня</span>
+                <span class="lbl">Срок разработки</span>
+              </div>
+              <div class="case-result">
+                <span class="num">24/7</span>
+                <span class="lbl">Приём заявок</span>
+              </div>
+              <div class="case-result">
+                <span class="num">-70%</span>
+                <span class="lbl">Время на расчёт цены</span>
+              </div>
             </div>
-          </div>
-          <div class="project-tech">
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://chistiyfinal.duckdns.org" target="_blank" class="link-primary">Открыть</a>
-          </div>
-        </div>
-
-        <!-- Чистый Финал — Приложение -->
-        <div class="project-card">
-          <div class="project-screenshots">
-            <video autoplay muted loop playsinline preload="metadata" style="width:100%;border-radius:12px;display:block;background:#000;">
-              <source src="videos/prezentaciya.mp4" type="video/mp4">
-            </video>
-          </div>
-          <div class="project-header">
-            <span class="project-badge badge-green">Веб-приложение</span>
-            <h3>Чистый Финал — Приложение</h3>
-            <p class="project-desc">
-              Облачное приложение для клининговой компании. Панель администратора,
-              база знаний, управление заказами и клиентами.
-            </p>
-            <div class="project-features">
+            <div class="case-features">
+              <span>Калькулятор</span>
               <span>Админ-панель</span>
               <span>База знаний</span>
               <span>Заказы</span>
-              <span>API</span>
+              <span>SEO</span>
+              <span>Адаптивный</span>
             </div>
-          </div>
-          <div class="project-tech">
-            <span>Express.js</span>
-            <span>SQLite</span>
-            <span>HTML/CSS</span>
-            <span>JavaScript</span>
-          </div>
-          <div class="project-links">
-            <a href="https://chistiyfinal.duckdns.org/admin.html" target="_blank" class="link-primary">Открыть</a>
+            <div class="case-tech">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JavaScript</span>
+              <span>Express.js</span>
+              <span>SQLite</span>
+            </div>
+            <div class="case-links">
+              <a href="https://chistiyfinal.duckdns.org" target="_blank" class="link-primary">Открыть</a>
+              <a href="https://chistyyfinal.netlify.app" target="_blank" class="link-outline">Лендинг</a>
+            </div>
           </div>
         </div>
 
-        <!-- Школа Роста -->
-        <div class="project-card">
-          <div class="project-screenshots">
+        <!-- Кейс 2: Школа Роста -->
+        <div class="case-card">
+          <div class="case-visual" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
             <img src="screenshots/shkola-rosta-login.png" alt="Школа Роста — вход" loading="lazy">
             <img src="screenshots/shkola-rosta-dashboard.png" alt="Школа Роста — дашборд" loading="lazy">
           </div>
-          <div class="project-header">
-            <span class="project-badge badge-purple">Трекер задач</span>
+          <div class="case-body">
+            <span class="case-badge badge-app">Трекер задач</span>
             <h3>Школа Роста</h3>
-            <p class="project-desc">
-              Кастомный трекер задач для онлайн-школы. Управление проектами, задачами, учениками и командой. 
-              Панель аналитики с дедлайнами и статистикой.
+            <p class="case-niche">Ниша: онлайн-школа</p>
+            <p class="case-desc">
+              Кастомный трекер задач для онлайн-школы. Управление проектами,
+              задачами, учениками и командой. Панель аналитики с дедлайнами
+              и статистикой. Две роли: администратор и сотрудник.
             </p>
-            <div class="project-features">
+            <div class="case-results">
+              <div class="case-result">
+                <span class="num">3 дня</span>
+                <span class="lbl">Срок разработки</span>
+              </div>
+              <div class="case-result">
+                <span class="num">5+</span>
+                <span class="lbl">Модулей</span>
+              </div>
+              <div class="case-result">
+                <span class="num">-80%</span>
+                <span class="lbl">Время на управление задачами</span>
+              </div>
+            </div>
+            <div class="case-features">
               <span>Дашборд</span>
               <span>Проекты</span>
               <span>Задачи</span>
@@ -561,33 +530,49 @@
               <span>Роли</span>
               <span>Авторизация</span>
             </div>
-          </div>
-          <div class="project-tech">
-            <span>Express.js</span>
-            <span>React</span>
-            <span>SQLite</span>
-            <span>TailwindCSS</span>
-            <span>Vite</span>
-            <span>JWT</span>
-          </div>
-          <div class="project-links">
-            <a href="https://shkolarosta.duckdns.org" target="_blank" class="link-primary">Открыть</a>
+            <div class="case-tech">
+              <span>Express.js</span>
+              <span>React</span>
+              <span>SQLite</span>
+              <span>TailwindCSS</span>
+              <span>Vite</span>
+              <span>JWT</span>
+            </div>
+            <div class="case-links">
+              <a href="https://shkolarosta.duckdns.org" target="_blank" class="link-primary">Открыть</a>
+            </div>
           </div>
         </div>
 
-        <!-- Glow Tracker -->
-        <div class="project-card">
-          <div class="project-screenshots">
-            <img src="screenshots/glow-tracker.png" alt="Glow Tracker — лендинг" loading="lazy">
+        <!-- Кейс 3: Glow Tracker -->
+        <div class="case-card">
+          <div class="case-visual">
+            <img src="screenshots/glow-tracker.png" alt="Glow Tracker" loading="lazy">
           </div>
-          <div class="project-header">
-            <span class="project-badge badge-green">CRM система</span>
+          <div class="case-body">
+            <span class="case-badge badge-app">CRM-система</span>
             <h3>Glow Tracker</h3>
-            <p class="project-desc">
-              Трекер задач для эстетической клиники. Панель управления для администратора, куратора и клиента. 
-              Расписание, задачи, уведомления, чат.
+            <p class="case-niche">Ниша: эстетическая клиника</p>
+            <p class="case-desc">
+              Трекер задач для эстетической клиники. Панель управления
+              для администратора, куратора и клиента. Расписание, задачи,
+              уведомления, встроенный чат. Три роли с разными правами.
             </p>
-            <div class="project-features">
+            <div class="case-results">
+              <div class="case-result">
+                <span class="num">4 дня</span>
+                <span class="lbl">Срок разработки</span>
+              </div>
+              <div class="case-result">
+                <span class="num">3</span>
+                <span class="lbl">Роли</span>
+              </div>
+              <div class="case-result">
+                <span class="num">-60%</span>
+                <span class="lbl">Время на коммуникацию</span>
+              </div>
+            </div>
+            <div class="case-features">
               <span>3 роли</span>
               <span>Расписание</span>
               <span>Чат</span>
@@ -596,16 +581,52 @@
               <span>Клиенты</span>
               <span>Дашборд</span>
             </div>
+            <div class="case-tech">
+              <span>Express.js</span>
+              <span>SQLite</span>
+              <span>EJS</span>
+              <span>CSS</span>
+              <span>JWT</span>
+            </div>
+            <div class="case-links">
+              <a href="https://glowtracker.duckdns.org" target="_blank" class="link-primary">Открыть</a>
+            </div>
           </div>
-          <div class="project-tech">
-            <span>Express.js</span>
-            <span>SQLite</span>
-            <span>EJS</span>
-            <span>CSS</span>
-            <span>JWT</span>
+        </div>
+
+        <!-- Кейс 4: Рекламные видео -->
+        <div class="case-card">
+          <div class="case-visual">
+            <video controls preload="metadata" style="width:100%;border-radius:12px;display:block;background:#000;">
+              <source src="videos/Реклама_школа_английского.mp4" type="video/mp4">
+            </video>
           </div>
-          <div class="project-links">
-            <a href="https://glowtracker.duckdns.org/" target="_blank" class="link-primary">Открыть</a>
+          <div class="case-body">
+            <span class="case-badge badge-video">Рекламное видео</span>
+            <h3>Рекламные ролики</h3>
+            <p class="case-niche">Ниша: образование, туризм, IT</p>
+            <p class="case-desc">
+              Серия рекламных видео для разных ниш: школа английского языка,
+              туроператор, IT-школа. Видео созданы для продвижения в соцсетях
+              и на рекламных площадках.
+            </p>
+            <div class="case-results">
+              <div class="case-result">
+                <span class="num">4</span>
+                <span class="lbl">Ролика</span>
+              </div>
+              <div class="case-result">
+                <span class="num">30-60с</span>
+                <span class="lbl">Длительность</span>
+              </div>
+              <div class="case-result">
+                <span class="num">3</span>
+                <span class="lbl">Ниши</span>
+              </div>
+            </div>
+            <div class="case-links">
+              <a href="videos/Реклама_школа_английского.mp4" target="_blank" class="link-outline">Смотреть</a>
+            </div>
           </div>
         </div>
 
@@ -619,9 +640,16 @@
     <div class="reveal">
       <h2>Стек</h2>
       <div class="stack-tags">
-        <span>Qwen3.7-Plus</span>
-        <span>Flyvi.io</span>
-        <span>Study24.ai</span>
+        <span>OpenCode</span>
+        <span>Claude</span>
+        <span>ChatGPT</span>
+        <span>GitHub</span>
+        <span>Express.js</span>
+        <span>React</span>
+        <span>SQLite</span>
+        <span>Node.js</span>
+        <span>DuckDNS</span>
+        <span>Let's Encrypt</span>
       </div>
     </div>
   </div>
@@ -633,6 +661,7 @@
       <div class="contacts-card">
         <h2>Контакты</h2>
         <p>✉ <a href="mailto:nmahnovets@yandex.ru">nmahnovets@yandex.ru</a></p>
+        <p>GitHub: <a href="https://github.com/natamaxno-source" target="_blank">natamaxno-source</a></p>
         <div class="btn-group" style="margin-top:24px">
           <a href="mailto:nmahnovets@yandex.ru" class="btn btn-primary">Написать</a>
         </div>
@@ -646,7 +675,6 @@
 </footer>
 
 <script>
-  // --- animated bg ---
   (function() {
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
@@ -684,7 +712,6 @@
         ctx.fillStyle = `rgba(255,210,0,${p.a})`;
         ctx.fill();
       }
-      // connections
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
@@ -705,22 +732,6 @@
     draw();
   })();
 
-  // --- portfolio render ---
-  const videos = [
-    { file: "videos/Видеоаватар.mp4", label: "Видеоаватар" },
-    { file: "videos/Реклама_школа_английского.mp4", label: "Реклама школы английского" },
-    { file: "videos/Реклама_туроператор.mp4", label: "Реклама туроператора" },
-    { file: "videos/Реклама_IT_Speak.mp4", label: "Реклама для школы IT Speak" },
-  ];
-  const grid = document.getElementById('portfolio-grid');
-  videos.forEach(v => {
-    const item = document.createElement('div');
-    item.className = 'portfolio-item';
-    item.innerHTML = `<video controls preload="metadata"><source src="${v.file}" type="video/mp4"></video><div class="label">${v.label}</div>`;
-    grid.appendChild(item);
-  });
-
-  // --- scroll reveal ---
   (function() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
