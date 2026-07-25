@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Школа Роста — Предпросмотр</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .banner {
+    background: linear-gradient(135deg, #a855f7, #6366f1);
+    color: #fff;
+    text-align: center;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .banner span { opacity: .7; font-weight: 400; margin-left: 8px; }
+  .frame-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .frame-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+  }
+  .frame-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    cursor: default;
+  }
+</style>
+</head>
+<body>
+  <div class="banner">
+    ПРЕДПРОСМОТР — Школа Роста
+    <span>Интерактивная версия на shkolarosta.duckdns.org</span>
+  </div>
+  <div class="frame-wrapper">
+    <iframe src="https://shkolarosta.duckdns.org" tabindex="-1"></iframe>
+    <div class="frame-overlay"></div>
+  </div>
+</body>
+</html>
