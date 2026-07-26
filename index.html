@@ -760,9 +760,9 @@
     <div class="reveal">
       <div class="contacts-card">
         <h2>Контакты</h2>
-        <p>✉ <a href="mailto:nmahnovets@yandex.ru">nmahnovets@yandex.ru</a></p>
+        <p>✉ nmahnovets@yandex.ru</p>
         <div class="btn-group" style="margin-top:24px">
-          <a href="mailto:nmahnovets@yandex.ru" class="btn btn-primary">Написать</a>
+          <button class="btn btn-primary" onclick="navigator.clipboard.writeText('nmahnovets@yandex.ru').then(()=>{this.textContent='Скопировано!';setTimeout(()=>this.textContent='Скопировать email',2000)})">Скопировать email</button>
         </div>
       </div>
     </div>
