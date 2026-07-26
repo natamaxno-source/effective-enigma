@@ -271,9 +271,25 @@
       width: 100%;
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,.08);
-      background: #111;
+      background: #0a0a0a;
       display: block;
+      object-fit: cover;
     }
+    .video-replay-overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      border-radius: 10px;
+      justify-content: center;
+      align-items: center;
+      color: rgba(255,255,255,.8);
+      font-size: 14px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .video-replay-overlay.visible { display: flex; }
+    .project-card .project-video { position: relative; }
     .project-card .project-tech {
       padding: 16px 28px;
       border-top: 1px solid rgba(255,255,255,.06);
@@ -539,9 +555,10 @@
             </div>
           </div>
           <div class="project-video">
-            <video muted loop autoplay playsinline onclick="openVideoModal(this)">
+            <video muted loop autoplay playsinline preload="metadata" onclick="openVideoModal(this)" data-slow="0.6">
               <source src="videos/chistiy-final-landing.mp4" type="video/mp4">
             </video>
+            <div class="video-replay-overlay" onclick="event.stopPropagation();this.previousElementSibling.play();this.classList.remove('visible')">▶ Смотреть ещё раз</div>
           </div>
           <div class="project-tech">
             <span>HTML</span>
@@ -572,9 +589,10 @@
             </div>
           </div>
           <div class="project-video">
-            <video muted loop autoplay playsinline onclick="openVideoModal(this)">
+            <video muted loop autoplay playsinline preload="metadata" onclick="openVideoModal(this)" data-slow="0.5">
               <source src="videos/prezentaciya.mp4" type="video/mp4">
             </video>
+            <div class="video-replay-overlay" onclick="event.stopPropagation();this.previousElementSibling.play();this.classList.remove('visible')">▶ Смотреть ещё раз</div>
           </div>
           <div class="project-tech">
             <span>Express.js</span>
@@ -670,10 +688,31 @@
               <span>JWT</span>
             </div>
           </div>
-          <div class="project-video">
-            <video muted loop autoplay playsinline onclick="openVideoModal(this)">
-              <source src="videos/gt-curator.mp4" type="video/mp4">
-            </video>
+          <div class="project-screenshots">
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-admin-login.png" alt="Вход — Администратор" loading="lazy">
+              <div class="shot-label">Администратор · Вход</div>
+            </div>
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-admin-dashboard.png" alt="Дашборд — Администратор" loading="lazy">
+              <div class="shot-label">Администратор · Дашборд</div>
+            </div>
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-curator-login.png" alt="Вход — Куратор" loading="lazy">
+              <div class="shot-label">Куратор · Вход</div>
+            </div>
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-curator-dashboard.png" alt="Дашборд — Куратор" loading="lazy">
+              <div class="shot-label">Куратор · Дашборд</div>
+            </div>
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-client-login.png" alt="Вход — Клиент" loading="lazy">
+              <div class="shot-label">Клиент · Вход</div>
+            </div>
+            <div class="shot" onclick="openImgModal(this.querySelector('img').src)">
+              <img src="screenshots/gt-client-dashboard.png" alt="Дашборд — Клиент" loading="lazy">
+              <div class="shot-label">Клиент · Дашборд</div>
+            </div>
           </div>
           <div class="project-tech">
             <span>Express.js</span>
@@ -836,6 +875,7 @@ function openVideoModal(el) {
   const player = document.getElementById('videoModalPlayer');
   document.getElementById('videoModalSrc').src = src;
   player.load();
+  player.playbackRate = src.includes('prezentaciya') ? 0.5 : 0.7;
   player.play();
   document.getElementById('videoModal').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -866,6 +906,21 @@ function closeImgModal() {
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeVideoModal(); closeImgModal(); }
+});
+
+document.querySelectorAll('.project-video video[data-slow]').forEach(v => {
+  v.addEventListener('loadedmetadata', () => { v.playbackRate = parseFloat(v.dataset.slow) || 0.6; });
+  v.addEventListener('ratechange', () => {
+    if (v.playbackRate !== (parseFloat(v.dataset.slow) || 0.6)) v.playbackRate = parseFloat(v.dataset.slow) || 0.6;
+  });
+  v.addEventListener('ended', () => {
+    const ov = v.nextElementSibling;
+    if (ov && ov.classList.contains('video-replay-overlay')) ov.classList.add('visible');
+  });
+  v.addEventListener('play', () => {
+    const ov = v.nextElementSibling;
+    if (ov && ov.classList.contains('video-replay-overlay')) ov.classList.remove('visible');
+  });
 });
 </script>
 
