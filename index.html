@@ -306,6 +306,24 @@
       color: rgba(255,255,255,.6);
     }
     .project-card .project-links {
+      padding: 12px 28px 16px;
+      display: flex;
+      gap: 8px;
+    }
+    .project-card .project-links .btn-sm {
+      font-size: 12px;
+      padding: 6px 14px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 6px;
+      color: rgba(255,255,255,.7);
+      text-decoration: none;
+      transition: all .2s;
+    }
+    .project-card .project-links .btn-sm:hover {
+      border-color: #ffd200;
+      color: #ffd200;
+    }
+    .project-card .project-links {
       padding: 0 28px 24px;
       display: flex;
       gap: 12px;
@@ -666,6 +684,9 @@
             <span>Vite</span>
             <span>SQLite</span>
             <span>JWT</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/natamaxno-source/shkola-rosta-tracker" target="_blank" class="btn btn-sm">GitHub</a>
           </div>
         </div>
 
